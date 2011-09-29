@@ -12,18 +12,21 @@ Right = 2
 def there_is_a_line(a_players_moves):
     return a_players_moves in [
         [(Top, Left), (Top, Middle), (Top, Right)],
+        [(Middle, Left), (Middle, Middle), (Middle, Right)],
         [(Bottom, Left), (Bottom, Middle), (Bottom, Right)]]
 
 
-def test_there_is_a_line_at_the_top():
+def test_there_is_a_horizontal_line_at_the_top():
     assert there_is_a_line([(Top, Left), (Top, Middle), (Top, Right)])
 
-def test_there_is_not_a_line_at_the_top():
-    assert not there_is_a_line([(Top, Left), (Top, Middle), (Bottom, Right)])
+def test_there_is_a_horizontal_line_in_the_middle():
+    assert there_is_a_line([(Middle, Left), (Middle, Middle), (Middle, Right)])
 
-def test_there_is_a_line_at_the_bottom():
-    assert there_is_a_line(
-        [(Bottom, Left), (Bottom, Middle), (Bottom, Right)])
+def test_there_is_a_horizontal_line_at_the_bottom():
+    assert there_is_a_line([(Bottom, Left), (Bottom, Middle), (Bottom, Right)])
+
+def test_something_that_is_not_a_line():
+    assert not there_is_a_line([(Top, Left), (Top, Middle), (Bottom, Right)])
 
 
 def who_wins(moves):
