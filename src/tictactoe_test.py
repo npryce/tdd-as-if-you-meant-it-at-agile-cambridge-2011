@@ -9,11 +9,17 @@ Middle = 1
 Bottom = 2
 Right = 2
 
+def there_is_a_line(moves):
+    return moves in [
+        [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Top, Right)],
+        [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Middle, Right), (Bottom, Right)]]
+
 def who_wins(moves):
-    if moves == [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Top, Right)]:
-        return FirstPlayer
-    elif moves == [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Middle, Right), (Bottom, Right)]:
-        return SecondPlayer
+    if there_is_a_line(moves):
+        if len(moves) == 5:
+            return FirstPlayer
+        else:
+            return SecondPlayer
     else:
         return Nobody
     
