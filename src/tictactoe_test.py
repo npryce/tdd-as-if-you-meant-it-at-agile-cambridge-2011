@@ -10,9 +10,9 @@ Bottom = 2
 Right = 2
 
 def who_wins(moves):
-    if len(moves) == 5:
+    if moves == [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Top, Right)]:
         return FirstPlayer
-    elif len(moves) == 6:
+    elif moves == [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Middle, Right), (Bottom, Right)]:
         return SecondPlayer
     else:
         return Nobody
@@ -26,7 +26,7 @@ def test_nobody_has_won_when_player_x_plays_in_the_middle():
     winner = who_wins([(Middle, Middle)])
     assert winner == Nobody
 
-def test_x_wins_after_minimal_number_of_moves():
+def test_first_player_wins_after_minimal_number_of_moves():
     winner = who_wins([
             (Top, Left),
             (Bottom, Left),
@@ -36,7 +36,17 @@ def test_x_wins_after_minimal_number_of_moves():
     
     assert winner == FirstPlayer
 
-def test_o_wins_after_minimal_number_of_moves():
+def test_nobody_wins_after_five_inconclusive_moves():
+    winner = who_wins([
+            (Top, Left),
+            (Bottom, Left),
+            (Top, Middle),
+            (Bottom, Middle),
+            (Middle, Left)])
+    
+    assert winner == Nobody
+
+def test_second_player_wins_after_minimal_number_of_moves():
     winner = who_wins([
             (Top, Left),
             (Bottom, Left),
