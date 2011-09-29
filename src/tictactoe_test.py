@@ -1,4 +1,9 @@
 
+Nobody = ""
+
 
 def test_something():
-    assert True
+    winner = Nobody
+    assert winner == Nobody
+
+
