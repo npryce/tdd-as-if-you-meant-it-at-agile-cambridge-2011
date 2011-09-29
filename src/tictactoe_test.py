@@ -9,29 +9,31 @@ Middle = 1
 Bottom = 2
 Right = 2
 
-def there_is_a_line(moves):
-    return moves in [
-        [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Top, Right)],
-        [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Middle, Right), (Bottom, Right)]]
+def there_is_a_line(a_players_moves):
+    return a_players_moves in [
+        [(Top, Left), (Top, Middle), (Top, Right)],
+        [(Bottom, Left), (Bottom, Middle), (Bottom, Right)]]
 
 
-def test_there_is_a_line_by_first_player_at_the_top():
-    assert there_is_a_line([(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Top, Right)])
+def test_there_is_a_line_at_the_top():
+    assert there_is_a_line([(Top, Left), (Top, Middle), (Top, Right)])
 
-def test_there_is_not_a_line_by_first_player_at_the_top():
-    assert not there_is_a_line([(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Bottom, Right)])
+def test_there_is_not_a_line_at_the_top():
+    assert not there_is_a_line([(Top, Left), (Top, Middle), (Bottom, Right)])
 
-def test_there_is_a_line_by_second_player_at_the_bottom():
+def test_there_is_a_line_at_the_bottom():
     assert there_is_a_line(
-        [(Top, Left), (Bottom, Left), (Top, Middle), (Bottom, Middle), (Middle, Right), (Bottom, Right)])
+        [(Bottom, Left), (Bottom, Middle), (Bottom, Right)])
 
 
 def who_wins(moves):
-    if there_is_a_line(moves):
-        if len(moves) == 5:
-            return FirstPlayer
-        else:
-            return SecondPlayer
+    first_player_moves = moves[::2]
+    second_player_moves = moves[1::2]
+    
+    if there_is_a_line(first_player_moves):
+        return FirstPlayer
+    elif there_is_a_line(second_player_moves):
+        return SecondPlayer
     else:
         return Nobody
     
