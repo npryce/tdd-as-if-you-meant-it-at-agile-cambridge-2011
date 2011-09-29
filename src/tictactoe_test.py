@@ -10,12 +10,15 @@ Bottom = 2
 Right = 2
 
 def there_is_a_line(a_players_moves):
-    horizontal_lines = [[(row, col) for col in [Left, Middle, Right]] for row in [Top, Middle, Bottom]]
-    return a_players_moves in horizontal_lines
+    horizontal_lines = [set((row, col) for col in [Left, Middle, Right]) for row in [Top, Middle, Bottom]]
+    return set(a_players_moves) in horizontal_lines
 
 
 def test_there_is_a_horizontal_line_at_the_top():
     assert there_is_a_line([(Top, Left), (Top, Middle), (Top, Right)])
+
+def test_there_is_a_horizontal_line_at_the_top_played_in_a_different_order():
+    assert there_is_a_line([(Top, Left), (Top, Right), (Top, Middle)])
 
 def test_there_is_a_horizontal_line_in_the_middle():
     assert there_is_a_line([(Middle, Left), (Middle, Middle), (Middle, Right)])
